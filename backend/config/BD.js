@@ -10,7 +10,7 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-const connectDB = async () => {
+const connectDBMongo = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
     console.log("Conexión exitosa a MongoDB");
@@ -29,4 +29,4 @@ const connectBDPostgres = async () => {
   }
 };
 
-module.exports = { connectDB, connectBDPostgres, pool };
+module.exports = { connectDBMongo, connectBDPostgres, pool };
