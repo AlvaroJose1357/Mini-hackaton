@@ -1,18 +1,14 @@
 const { pool } = require("../config/BD");
 exports.crearActividades = async (req, res) => {
-  const { activities_id, proyecto_id, nombre, responsable, fecha_entrega } =
-    req.body;
+  const { proyecto_id, nombre, responsable } = req.body;
   try {
-    const query = `
-      INSERT INTO actividades (activities_id, proyecto_id, nombre, responsable, fecha_entrega)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-    result = await pool.query(query, [
-      activities_id,
-      proyecto_id,
-      nombre,
-      responsable,
-      fecha_entrega,
-    ]);
+    // const query = `
+    //   INSERT INTO actividades (proyecto_id, nombre, responsable)
+    //   VALUES ($1, $2, $3 ) RETURNING *`;
+    result = await pool.query(
+      "INSERT INTO actividades (proyecto_id, nombre, responsable) VALUES ($1, $2, $3 ) RETURNING *",
+      [proyecto_id, nombre, responsable]
+    );
 
     res.status(201).json({
       message: "Actividad creada correctamente",

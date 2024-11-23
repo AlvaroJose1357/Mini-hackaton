@@ -1,3 +1,4 @@
+const { pool } = require("../config/BD");
 const Proyecto = require("../models/Proyecto");
 
 //Crear proyecto
@@ -6,7 +7,14 @@ exports.crearProyecto = async (req, res) => {
     const { nombre, descripcion, estado } = req.body;
     const proyecto = new Proyecto({ nombre, descripcion, estado });
     await proyecto.save();
-    res.status(201).json(proyecto);
+
+    const proyectoDB = await pool.query(
+      "INSERT INTO proyectos (proyecto_id, nombre) VALUES ($1, $2) RETURNING *",
+      [proyecto._id.toString(), nombre]
+    );
+    res
+      .status(201)
+      .json({ proyectoMongo: proyecto, proyectoPostgres: proyectoDB.rows[0] });
   } catch (error) {
     res.status(500).json({ message: "Error al crear el proyecto", error });
   }
