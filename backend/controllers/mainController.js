@@ -3,6 +3,7 @@ const { pool } = require("../config/BD");
 
 exports.obtenerProyectosConActividades = async (req, res) => {
   try {
+    const proyectos = await Proyecto.find();
     const proyectosConActividades = await Promise.all(
       proyectos.map(async (proyecto) => {
         const query = `
@@ -22,3 +23,4 @@ exports.obtenerProyectosConActividades = async (req, res) => {
       .json({ error: "Error al obtener proyectos con actividades", error });
   }
 };
+
