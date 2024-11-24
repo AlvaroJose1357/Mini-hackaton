@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Error from "../components/Error";
+import { estado } from "../data/estado";
 export default function Proyects() {
   const {
     register,
@@ -12,10 +13,15 @@ export default function Proyects() {
 
   const formSubmit = handleSubmit((data) => {
     console.log(data);
-    navigate("/proyectos");
+    navigate("/listProyect");
     // cuando ya se termine de enviar el formulario se reinician los valores
     setValue("name", "");
+    setValue("description", "");
   });
+
+  const handleFilter = (event) => {
+    console.log(event.target.value);
+  };
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
       <div>
@@ -36,11 +42,11 @@ export default function Proyects() {
               type="text"
               placeholder="Ingrese el Nombre del Proyecto"
               {...register("name", {
-                required: "El Nombre del Paciente es obligatorio",
+                required: "El Nombre del Proyecto es obligatorio",
                 minLength: {
                   value: 2,
                   message:
-                    "El Nombre del Paciente debe tener al menos 2 caracteres",
+                    "El Nombre del Proyecto debe tener al menos 2 caracteres",
                 },
               })}
             />
@@ -57,16 +63,45 @@ export default function Proyects() {
               className="w-full border border-gray-100 p-3"
               type="text"
               placeholder="Coloca una descripcion del Proyecto"
-              {...register("name", {
-                required: "El Nombre del Paciente es obligatorio",
+              {...register("description", {
+                required: "La Descripcion del proyecto es obligatorio",
                 minLength: {
-                  value: 2,
+                  value: 5,
                   message:
-                    "El Nombre del Paciente debe tener al menos 2 caracteres",
+                    "La Descripcion del proyecto debe tener al menos 5 caracteres",
                 },
               })}></textarea>
-            {errors.name && <Error>{errors.name.message?.toString()}</Error>}
+            {errors.description && (
+              <Error>{errors.description.message?.toString()}</Error>
+            )}
           </div>
+          <div className="mb-5">
+            <select
+              id="category"
+              className="flex-1 rounded-xl bg-slate-300 w-full p-3"
+              onChange={handleFilter}
+              {...register("category", {
+                required: "La Categoria del proyecto es obligatorio",
+              })}>
+              <option value=""> --Todos los estados</option>
+              {estado.map((estadoOp) => (
+                <option
+                  key={estadoOp.id}
+                  value={estadoOp.id}
+                  className={`${estadoOp.color}`}>
+                  {estadoOp.nombre}
+                </option>
+              ))}
+            </select>
+            {errors.category && (
+              <Error>{errors.category.message?.toString()}</Error>
+            )}
+          </div>
+          <input
+            type="submit"
+            className="w-full cursor-pointer bg-gray-500 p-3 font-bold uppercase text-white transition-colors hover:bg-gray-700"
+            value={"Crear Proyecto"}
+          />
         </form>
       </div>
     </div>
