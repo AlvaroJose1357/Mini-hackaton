@@ -5,6 +5,7 @@ import Proyects from "./pages/Proyects";
 import Activities from "./pages/Activities";
 import CreateActivities from "./pages/CreateActivities";
 import ListProyect from "./pages/ListProyect";
+import Error404 from "./pages/Error404";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         />
         <Route
           path="*"
-          element={<h1>Not Found</h1>}
+          element={<Error404 />}
         />
         <Route
           path="/proyectos"

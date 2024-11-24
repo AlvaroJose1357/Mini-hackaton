@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Error from "../components/Error";
 import { estado } from "../data/estado";
+import axiosInstance from "../config/axios";
 export default function Proyects() {
   const {
     register,
@@ -11,13 +12,18 @@ export default function Proyects() {
   } = useForm();
   const navigate = useNavigate();
 
-  const formSubmit = handleSubmit((data) => {
+  const formSubmit = async (data) => {
     console.log(data);
+
+    const response = await axiosInstance.get(
+      `/readActivity/${data.proyecto_id}`
+    );
+    setActividades(response.data);
     navigate("/listProyect");
     // cuando ya se termine de enviar el formulario se reinician los valores
     setValue("name", "");
     setValue("description", "");
-  });
+  };
 
   const handleFilter = (event) => {
     console.log(event.target.value);
@@ -29,7 +35,7 @@ export default function Proyects() {
         <form
           className="mb-10 rounded-2xl bg-white px-5 py-10 shadow-2xl"
           noValidate
-          onSubmit={formSubmit}>
+          onSubmit={handleSubmit(formSubmit)}>
           <div className="mb-5">
             <label
               htmlFor="name"
