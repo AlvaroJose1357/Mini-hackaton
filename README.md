@@ -19,7 +19,8 @@ Este proyecto utiliza el stack **MERN (MongoDB, Express, React, Node.js)** combi
 5. [Descripción del Frontend](#descripción-del-frontend)  
 6. [Uso del Sistema](#uso-del-sistema)  
 7. [Endpoints del Backend](#endpoints-del-backend)  
-8. [Tecnologías Utilizadas](#tecnologías-utilizadas)  
+8. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+9. [Comandos SQL para crear la base de datos] (#Comandos-SQL-para-crear-la-base-de-datos)  
 
 ---
 
@@ -209,4 +210,21 @@ frontend
 - Axios  
 - TailwindCSS  
 
+---
+
+---
+## Comandos SQL para crear la base de datos
+CREATE TABLE actividades (
+  activities_id serial PRIMARY KEY,
+  nombre VARCHAR(100),
+  responsable VARCHAR(50),
+  fecha_entrega TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  proyecto_id varchar(100),
+  FOREIGN KEY (proyecto_id) REFERENCES proyectos(proyecto_id)
+);
+
+CREATE TABLE proyectos (
+  proyecto_id varchar(100) PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL
+);
 ---
