@@ -1,29 +1,13 @@
-/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
-import axiosInstance from "../config/axios";
+import { useRoot } from "../hooks/useRoot";
 
-const ActivityForm = ({ setActividades }) => {
+const ActivityForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  // Función para manejar el envío del formulario
-  const onSubmit = async (data) => {
-    console.log(data);
-    try {
-      // Eliminar fecha_entrega de los datos antes de enviarlos
-
-      const response = await axiosInstance.post("/createActivity");
-      setActividades(response.data);
-      // Mostrar mensaje de éxito si la actividad se crea correctamente
-      alert("Actividad creada correctamente");
-    } catch (err) {
-      console.error(err);
-      alert("Error al crear la actividad");
-    }
-  };
+  const { onSubmitCreate } = useRoot();
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -32,7 +16,7 @@ const ActivityForm = ({ setActividades }) => {
       </h2>
 
       {/* Formulario usando React Hook Form */}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitCreate)}>
         <div className="mb-4">
           <label
             htmlFor="proyecto_id"

@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axiosInstance from "../config/axios";
+import { useRoot } from "../hooks/useRoot";
 
 const ListActivitiesForm = () => {
   const {
@@ -8,27 +7,9 @@ const ListActivitiesForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [actividades, setActividades] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const { actividades, onSubmit, loading, errorMessage } = useRoot();
 
   // Función para manejar el envío del formulario
-  const onSubmit = async (data) => {
-    setLoading(true);
-    setErrorMessage("");
-
-    try {
-      const response = await axiosInstance.get(
-        `/readActivity/${data.proyecto_id}`
-      );
-      setActividades(response.data);
-    } catch (err) {
-      setErrorMessage("No se pudieron obtener las actividades.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -78,11 +59,11 @@ const ListActivitiesForm = () => {
         <p className="text-center text-blue-500">Cargando actividades...</p>
       )}
 
-      {!loading && actividades.length > 0 && (
+      {!loading && actividades?.length > 0 && (
         <div className="mt-6">
           <h3 className="text-lg font-semibold">Actividades:</h3>
           <ul className="mt-4">
-            {actividades.map((actividad) => (
+            {actividades?.map((actividad) => (
               <li
                 key={actividad.id}
                 className="border-b py-2">
