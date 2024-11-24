@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"; // Importar para navegación
 import { useForm } from "react-hook-form";
 import { useRoot } from "../hooks/useRoot";
 
@@ -8,8 +9,7 @@ const ListActivitiesForm = () => {
     formState: { errors },
   } = useForm();
   const { actividades, onSubmit, loading, errorMessage } = useRoot();
-
-  // Función para manejar el envío del formulario
+  const navigate = useNavigate(); // Hook para redirección
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -63,7 +63,7 @@ const ListActivitiesForm = () => {
         <div className="mt-6">
           <h3 className="text-lg font-semibold">Actividades:</h3>
           <ul className="mt-4">
-            {actividades?.map((actividad) => (
+            {actividades.map((actividad) => (
               <li
                 key={actividad.id}
                 className="border-b py-2">
@@ -74,6 +74,14 @@ const ListActivitiesForm = () => {
               </li>
             ))}
           </ul>
+          {/* Botón para agregar actividad */}
+          <div className="mt-4">
+            <button
+              onClick={() => navigate("/createActivity")}
+              className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600">
+              Agregar Actividad
+            </button>
+          </div>
         </div>
       )}
     </div>
