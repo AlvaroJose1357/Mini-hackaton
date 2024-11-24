@@ -212,7 +212,6 @@ frontend
 
 ---
 
----
 ## Comandos SQL para Crear la Base de Datos
 
 Ejecuta los siguientes comandos en tu servidor de PostgreSQL para crear las tablas necesarias:
