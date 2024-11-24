@@ -11,7 +11,7 @@ router.get("/proyect", proyectosController.listarProyectos);
 // obtiene las actividades relacionadas a un proyecto
 router.get(
   "/readActivity/:proyecto_id",
-  mainController.obtenerProyectosConActividades
+  actividadesController.listarActividades
 );
 // agrega las actividades relacionadas a un proyecto el cual el id se pasa por body
 router.post("/createActivity", actividadesController.crearActividades);

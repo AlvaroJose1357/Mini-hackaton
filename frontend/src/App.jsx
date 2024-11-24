@@ -34,7 +34,7 @@ function App() {
           element={<ListActivitiesForm />}
         />
         <Route
-          path="/actividades/:proyect_id"
+          path="/createActivity"
           element={<ActivityForm />}
         />
       </Routes>

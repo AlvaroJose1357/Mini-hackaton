@@ -39,9 +39,13 @@ export const ContextappProvider = ({ children }) => {
   const onSubmitCreate = async (data) => {
     console.log(data);
     try {
-      // Eliminar fecha_entrega de los datos antes de enviarlos
+      const payload = {
+        proyecto_id: data.proyecto_id,
+        nombre: data.nombre,
+        responsable: data.responsable,
+      };
 
-      const response = await axios.post(`${reactEnv}/createActivity`);
+      const response = await axios.post(`${reactEnv}/createActivity`, payload);
       setActividades(response.data);
       // Mostrar mensaje de éxito si la actividad se crea correctamente
       alert("Actividad creada correctamente");
