@@ -69,8 +69,18 @@ export const ContextappProvider = ({ children }) => {
   const formSubmit = async (data) => {
     console.log(data);
     try {
-      // Cambiar a POST para enviar los datos al backend
-      const response = await axios.post(`${reactEnv}/createProyect`, data);
+      // Estructurar los datos exactamente como los espera el backend
+      const payload = {
+        nombre: data.name,
+        descripcion: data.description,
+        estado: data.category, // Esto corresponde al campo "estado" en el backend
+      };
+
+      console.log("Datos enviados al backend:", payload);
+
+      // Realizar la petición POST al endpoint correspondiente
+      const response = await axios.post(`${reactEnv}/createProyect`, payload);
+      console.log("Respuesta del servidor:", response.data);
       alert("Proyecto creado exitosamente");
       // Actualizar la lista de proyectos para reflejar el nuevo proyecto
       setProyects((prevProyects) => [...prevProyects, response.data]);
