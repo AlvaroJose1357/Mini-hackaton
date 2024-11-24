@@ -28,7 +28,7 @@ function App() {
           element={<Activities />}
         />
         <Route
-          path="/actividades/:"
+          path="/actividades/:proyect_id"
           element={<CreateActivities />}
         />
       </Routes>
