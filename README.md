@@ -20,7 +20,7 @@ Este proyecto utiliza el stack **MERN (MongoDB, Express, React, Node.js)** combi
 6. [Uso del Sistema](#uso-del-sistema)  
 7. [Endpoints del Backend](#endpoints-del-backend)  
 8. [Tecnologías Utilizadas](#tecnologías-utilizadas)
-9. [Comandos SQL para crear la base de datos] (#Comandos-SQL-para-crear-la-base-de-datos)  
+9. [Comandos SQL para Crear la Base de Datos](#comandos-sql-para-crear-la-base-de-datos) 
 
 ---
 
@@ -213,7 +213,16 @@ frontend
 ---
 
 ---
-## Comandos SQL para crear la base de datos
+## Comandos SQL para Crear la Base de Datos
+
+Ejecuta los siguientes comandos en tu servidor de PostgreSQL para crear las tablas necesarias:
+
+```sql
+CREATE TABLE proyectos (
+  proyecto_id varchar(100) PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE actividades (
   activities_id serial PRIMARY KEY,
   nombre VARCHAR(100),
@@ -222,9 +231,4 @@ CREATE TABLE actividades (
   proyecto_id varchar(100),
   FOREIGN KEY (proyecto_id) REFERENCES proyectos(proyecto_id)
 );
-
-CREATE TABLE proyectos (
-  proyecto_id varchar(100) PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL
-);
----
+```
