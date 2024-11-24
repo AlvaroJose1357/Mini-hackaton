@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Proyects from "./pages/Proyects";
 import Activities from "./pages/Activities";
 import CreateActivities from "./pages/CreateActivities";
+import ListProyect from "./pages/ListProyect";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="/proyectos"
           element={<Proyects />}
+        />
+        <Route
+          path="/listProyect"
+          element={<ListProyect />}
         />
         <Route
           path="/actividades"
