@@ -87,7 +87,7 @@ export default function Proyects() {
               {estado.map((estadoOp) => (
                 <option
                   key={estadoOp.id}
-                  value={estadoOp.id}
+                  value={estadoOp.nombre}
                   className={`${estadoOp.color}`}>
                   {estadoOp.nombre}
                 </option>
